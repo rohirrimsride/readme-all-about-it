@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-console.log(inquirer);
+
 // TODO: Create an array of questions for user input
 const questionsData = () => {
     console.log(`
@@ -9,6 +9,9 @@ const questionsData = () => {
     Provide README Data
     *******************
     `);
+
+    const readmeData = [];
+
     return inquirer.prompt([
         {
             type: 'input',
@@ -84,6 +87,19 @@ const questionsData = () => {
         },
         {
             type: 'input',
+            name: 'tests',
+            message: 'Provide any test instructions for testing your application, or N/A if not applicable. (Required)',
+            validate: testsInput => {
+                if (testsInput) {
+                    return true;
+                } else {
+                    console.log('Please provide relevant testing instructions, or N/A if not applicable')
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
             name: 'questionsGitHubName',
             message: 'Please add your GitHub Username (Required)',
             validate: questionsGitHubNameInput => {
@@ -107,13 +123,11 @@ const questionsData = () => {
                     return false;
                 }
             }
-        },
-        {
-            type: 'input',
-            name: 'tests',
-            message: ''
-        }
+        }        
     ])
+    .then(readmeData => {
+        console.log(readmeData);
+    })
 };
 
 // TODO: Create a function to write README file
