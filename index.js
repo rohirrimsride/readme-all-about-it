@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown')
+const generateMdPage = require('./utils/generateMarkdown')
 
 // TODO: Create an array of questions for user input
 const questionsData = readmeData => {
@@ -86,7 +86,7 @@ const questionsData = readmeData => {
             type: 'rawlist',
             name: 'license',
             message: 'What license would you like to apply to your project? (Required) Check this resource for more information regarding licenses [https://choosealicense.com/licenses/]',
-            choices: ['GNU GPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense', 'No License']
+            choices: ['ISC', 'GNU GPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense', 'No License']
         },
         {
             type: 'input',
@@ -130,14 +130,26 @@ const questionsData = readmeData => {
     ])
     .then(readmeAnswers => {
         readmeData.push(readmeAnswers);
-        console.log(readmeData);
+        console.log(readmeData[0].title);
+        return readmeData;
     })
 };
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    return new Promise
-}
+    return new Promise((resolve, reject) => {
+        fs.writeFile('test-readme.md', fileName, data, err => {
+            if (err) {
+                reject (err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'File updated!'
+            });
+        });
+    });
+};
 
 // TODO: Create a function to initialize app
 const init = () => {
@@ -148,5 +160,12 @@ const init = () => {
 // init();
 questionsData()
     .then(readmeData => {
-        return generateMarkdown(readmeData);
+        console.log(readmeData);
+        return generateMdPage(readmeData);
+    })
+    .then(pageMarkdown => {
+        return writeToFile(pageMarkdown);
+    })
+    .catch(err => {
+        console.log(err);
     })
