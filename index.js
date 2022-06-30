@@ -150,14 +150,14 @@ const questionsData = readmeData => {
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     return new Promise((resolve, reject) => {
-        fs.writeFile('test-readme.md', fileName, data, err => {
+        fs.writeFile('dist/README.md', fileName, data, err => {
             if (err) {
                 reject (err);
                 return;
             }
             resolve({
                 ok: true,
-                message: 'File updated!'
+                message: 'README Created!'
             });
         });
     });
@@ -176,6 +176,7 @@ questionsData()
         return generateMdPage(readmeData);
     })
     .then(pageMarkdown => {
+        console.log(pageMarkdown);
         return writeToFile(pageMarkdown);
     })
     .catch(err => {
