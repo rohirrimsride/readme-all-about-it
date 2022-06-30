@@ -72,12 +72,12 @@ const questionsData = readmeData => {
         {
             type: 'input',
             name: 'contribute',
-            message: 'Provide guidelines for developers who would like to contribute to your project (Required)',
+            message: 'Provide guidelines for developers who would like to contribute to your project. (Required)',
             validate: contributeInput => {
                 if (contributeInput) {
                     return true;
                 } else {
-                    console.log('Please let others know the guidelines for contributing to your project');
+                    console.log('Please let others know the guidelines for contributing to your project.');
                     return false;
                 }
             }
@@ -96,7 +96,7 @@ const questionsData = readmeData => {
                 if (testsInput) {
                     return true;
                 } else {
-                    console.log('Please provide relevant testing instructions, or N/A if not applicable')
+                    console.log('Please provide relevant testing instructions, or N/A if not applicable.')
                     return false;
                 }
             }
@@ -104,7 +104,7 @@ const questionsData = readmeData => {
         {
             type: 'input',
             name: 'questionsGitHubName',
-            message: 'Please add your GitHub Username (Required)',
+            message: 'Please add your GitHub Username. (Required)',
             validate: questionsGitHubNameInput => {
                 if (questionsGitHubNameInput) {
                     return true;
@@ -116,8 +116,20 @@ const questionsData = readmeData => {
         },
         {
             type: 'input',
+            name: 'questionsGitHubLink',
+            message: 'Please add the link to your GitHub profile. (Required)',
+            validate: questionsGitHubLinkInput => {
+                if (questionsGitHubLinkInput) {
+                    return true;
+                } else {
+                    console.log('Please enter the link to your GitHub profile.')
+                }
+            }
+        },
+        {
+            type: 'input',
             name: 'questionsEmail',
-            message: 'Please add your email address (Required)',
+            message: 'Please add your email address. (Required)',
             validate: questionsEmailInput => {
                 if (questionsEmailInput) {
                     return true;
@@ -130,7 +142,7 @@ const questionsData = readmeData => {
     ])
     .then(readmeAnswers => {
         readmeData.push(readmeAnswers);
-        console.log(readmeData[0].title);
+        
         return readmeData;
     })
 };
@@ -160,7 +172,7 @@ const init = () => {
 // init();
 questionsData()
     .then(readmeData => {
-        console.log(readmeData);
+        
         return generateMdPage(readmeData);
     })
     .then(pageMarkdown => {

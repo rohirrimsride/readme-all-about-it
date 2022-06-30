@@ -1,7 +1,8 @@
+const { link } = require("fs");
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-  console.log(license);
   // Much gratitude to lukas-h for a markdown list of badges https://gist.github.com/lukas-h/2a5d00690736b4c3a7ba
   let licenseOpt = ['ISC', 'GNUGPLv3', 'Mozilla', 'Apache', 'MIT', 'Boost', 'Unlicense', 'None']
     for (let i = 0; i < licenseOpt.length; i++) {
@@ -59,7 +60,6 @@ function renderLicenseLink(license) {
   Object.entries(licenseLinkOpt);
   for (const [key, value] of Object.entries(licenseLinkOpt)) {
     if (key === license) {
-      console.log(`${value}`);
       return `${value}`;
     };         
   };
@@ -68,14 +68,34 @@ function renderLicenseLink(license) {
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
 function renderLicenseSection(license) {
-
+  let licenseName = {
+    ISC: '[ISC]',
+       
+    GNU: '[GNU GPLv3]',
+        
+    Mozilla: '[Mozilla Public License 2.0]',
+        
+    Apache: '[Apache License 2.0]',
+      
+    MIT: '[MIT License]',
+      
+    Boost: '[Boost Software License 1.0]',
+     
+    Unlicense: '[The Unlicense]',
+     
+    None: ''  
+  }
+  Object.entries(licenseName);
+  for (const [key, value] of Object.entries(licenseName)) {
+    if (key === license) {
+      return `${value}`;
+    }
+  }
 }
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(readmeData) {
-  console.log(readmeData);
-  const { title, description, installation, usage, contribute, license, tests, questionsGitHubName, questionsEmail } = readmeData[0];
-  console.log(license);
+  const { title, description, installation, usage, contribute, license, tests, questionsGitHubName, questionsGitHubLink, questionsEmail } = readmeData[0];
   
   return `
   ${renderLicenseBadge(license)}${renderLicenseLink(license)}
@@ -110,7 +130,7 @@ function generateMarkdown(readmeData) {
 
   ## Questions
   If you have any questions please contact me.\n
-  GitHub Username: ${questionsGitHubName}\n
+  GitHub Username: [${questionsGitHubName}](${questionsGitHubLink})\n
   Email Address: ${questionsEmail}
   `
 }
