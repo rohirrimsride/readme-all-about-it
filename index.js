@@ -86,7 +86,7 @@ const questionsData = readmeData => {
             type: 'rawlist',
             name: 'license',
             message: 'What license would you like to apply to your project? (Required) Check this resource for more information regarding licenses [https://choosealicense.com/licenses/]',
-            choices: ['ISC', 'GNU GPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'Boost Software License 1.0', 'The Unlicense', 'No License']
+            choices: ['ISC', 'GNUGPLv3', 'Mozilla', 'Apache', 'MIT', 'Boost', 'Unlicense', 'None']
         },
         {
             type: 'input',
