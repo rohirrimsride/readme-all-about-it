@@ -37,33 +37,33 @@ function renderLicenseBadge(license) {
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-// function renderLicenseLink(license) {
-//   let licenseLinkOpt = {
+function renderLicenseLink(license) {
+  let licenseLinkOpt = {
     
-//     ISC: `(https://opensource.org/licenses/ISC)`,
+    ISC: `(https://opensource.org/licenses/ISC)`,
        
-//     GNU: `(https://www.gnu.org/licenses/gpl-3.0)`,
+    GNU: `(https://www.gnu.org/licenses/gpl-3.0)`,
         
-//     Mozilla: `(https://opensource.org/licenses/MPL-2.0)`,
+    Mozilla: `(https://opensource.org/licenses/MPL-2.0)`,
         
-//     Apache: `(https://opensource.org/licenses/Apache-2.0)`,
+    Apache: `(https://opensource.org/licenses/Apache-2.0)`,
       
-//     MIT: `(https://opensource.org/licenses/MIT)`,
+    MIT: `(https://opensource.org/licenses/MIT)`,
       
-//     Boost: `(https://www.boost.org/LICENSE_1_0.txt)`,
+    Boost: `(https://www.boost.org/LICENSE_1_0.txt)`,
      
-//     Unlicense: `(http://unlicense.org/)`,
+    Unlicense: `(http://unlicense.org/)`,
      
-//     None: ''  
-//   }
-//   Object.entries(licenseLinkOpt);
-//   for (const [key, value] of Object.entries(licenseLinkOpt)) {
-//     if (key === license) {
-//       console.log(`${value}`);
-//       return `${value}`;
-//     };         
-//   };
-// }
+    None: ''  
+  }
+  Object.entries(licenseLinkOpt);
+  for (const [key, value] of Object.entries(licenseLinkOpt)) {
+    if (key === license) {
+      console.log(`${value}`);
+      return `${value}`;
+    };         
+  };
+}
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
@@ -76,8 +76,9 @@ function generateMarkdown(readmeData) {
   console.log(readmeData);
   const { title, description, installation, usage, contribute, license, tests, questionsGitHubName, questionsEmail } = readmeData[0];
   console.log(license);
+  
   return `
-  ${renderLicenseBadge(license)}
+  ${renderLicenseBadge(license)}${renderLicenseLink(license)}
 
   # ${title}
 
@@ -102,7 +103,7 @@ function generateMarkdown(readmeData) {
   ${contribute}
 
   ## License
-  ${renderLicenseSection(license)}
+  ${renderLicenseSection(license)}${renderLicenseLink(license)}
 
   ## Tests
   ${tests}
