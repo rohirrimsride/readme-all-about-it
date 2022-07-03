@@ -129,7 +129,7 @@ function generateMarkdown(readmeData) {
   ${tests}
 
   ## Questions
-  If you have any questions please contact me.\n
+  If you have any questions please contact me using either of these options.\n
   GitHub Username: [${questionsGitHubName}](${questionsGitHubLink})\n
   Email Address: ${questionsEmail}
   `
